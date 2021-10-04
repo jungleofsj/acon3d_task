@@ -16,32 +16,40 @@ public class UserService {
 
     public Long joinUser(User user) {
         //유저 생성
-        return null;
+        if (this.isExistUser(user)) {//중복 userName 검증
+            return -1L;
+        }
+
+        userRepository.createUser(user);
+        return user.getId();
     }
 
     public Long logInUser(User user) {
         //유저 로그인
-        return null;
+        Long resultLogIn = userRepository.authUser(user);
+        return resultLogIn;
     }
 
     public Optional<User> findUserById(Long userId) {
         //id로 조회
-        return null;
+        Optional<User> resultUser = userRepository.findUserById(userId);
+        return resultUser;
     }
 
     public Optional<User> findUserByName(String userName) {
         //name으로 조회
-        return null;
+        Optional<User> resultUser = userRepository.findUserByName(userName);
+        return resultUser;
     }
 
     public List<User> findUserAll() {
         //user 전체 조회
-        return null;
+        return userRepository.findAllUser();
     }
 
     private Boolean isExistUser(User user) {
-        //중복 유저 생성 방지
-        return null;
+        Optional<User> result = userRepository.findUserByName(user.getName());
+        return !result.isEmpty();
     }
 
 

@@ -52,7 +52,7 @@ public class JdbcTempUserRepository implements UserRepository{
 
     @Override
     public Optional<User> findUserByName(String userName) {
-        List<User> result = jdbcTemplate.query("select * from user where name = ? ", userRowMapper(), userName);
+        List<User> result = jdbcTemplate.query("select * from USER where name = ? ", userRowMapper(), userName);
         return result.stream().findAny();
     }
 
