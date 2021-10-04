@@ -21,29 +21,23 @@ public class UserService {
         }
 
         userRepository.createUser(user);
+
         return user.getId();
     }
 
     public Long logInUser(User user) {
-        //유저 로그인
-        Long resultLogIn = userRepository.authUser(user);
-        return resultLogIn;
+        return userRepository.authUser(user);
     }
 
     public Optional<User> findUserById(Long userId) {
-        //id로 조회
-        Optional<User> resultUser = userRepository.findUserById(userId);
-        return resultUser;
+        return userRepository.findUserById(userId);
     }
 
     public Optional<User> findUserByName(String userName) {
-        //name으로 조회
-        Optional<User> resultUser = userRepository.findUserByName(userName);
-        return resultUser;
+        return userRepository.findUserByName(userName);
     }
 
     public List<User> findUserAll() {
-        //user 전체 조회
         return userRepository.findAllUser();
     }
 
@@ -51,9 +45,4 @@ public class UserService {
         Optional<User> result = userRepository.findUserByName(user.getName());
         return !result.isEmpty();
     }
-
-
-
-
-
 }
