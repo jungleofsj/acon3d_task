@@ -15,6 +15,8 @@ public class Item {
     private String editor;
 
     private Double price;
+    private Double commissionPct;
+    private Boolean approved = false;
 
     public Long getId() {
         return Id;
@@ -112,8 +114,7 @@ public class Item {
         this.approved = approved;
     }
 
-    private Double commissionPct;
-    private Boolean approved = false;
+
 
 
 

@@ -15,20 +15,7 @@ import java.util.Optional;
 
 @Controller
 public class ItemController {
-    /*
-    * ITEM CONTROLLER
-    * uri : /items
-    * ITEM 생성
-    * uri : POST /items/new
-    * ITEM 수정
-    * uri : PUT /items/{itemId}
-    * LIST ALL
-    * uri : GET /items/all
-    * LIST APPROVED
-    * uri : GET /items/approved
-    * ITEM 구매
-    * uri : POST /items/purchase
-    * */
+
     private final ItemService itemService;
     private final UserService userService;
 
@@ -61,7 +48,7 @@ public class ItemController {
         Item resultItem = itemService.createItem(item);
 
         return new ResponseEntity(resultItem, HttpStatus.OK);
-        //return ":/redirect";
+
     }
     //test input page
     @GetMapping("/items/update")
@@ -70,7 +57,7 @@ public class ItemController {
     }
 
     @PutMapping("/items/{id}")
-    public ResponseEntity updateItem(@RequestHeader("Authorization") Long userType, @RequestBody Item item, @PathVariable("id") long id) {
+    public ResponseEntity updateItem(@RequestHeader("Authorization") Long userType, @RequestBody Item item, @PathVariable("id") Long id) {
         if (userType != User.USER_TYPE_EDITOR) {
             return new ResponseEntity(null, HttpStatus.UNAUTHORIZED);
         }

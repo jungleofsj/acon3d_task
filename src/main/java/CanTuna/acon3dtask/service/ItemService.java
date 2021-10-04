@@ -47,13 +47,6 @@ public class ItemService {
     public  Optional<Item> findItemByName(String itemName) {
         Optional<Item> findItem = itemRepository.findItemByName(itemName);
         Item temp = findItem.get();
-        System.out.println("-----------------------");
-        System.out.println("Serviceitemfind id ::: " +  temp.getId());
-        System.out.println("Serviceitemfind namekor ::: " +  temp.getNameKor());
-        System.out.println("Serviceitemfind creator ::: " +  temp.getCreator() );
-        System.out.println("Serviceitemfind approved ::: " +  temp.getApproved());
-        System.out.println("Serviceitemfind approved ::: " +  temp.getTextKor());
-        System.out.println("-----------------------");
         return findItem.stream().findAny();
     }
 
@@ -63,17 +56,14 @@ public class ItemService {
     }
 
     public List<Item> viewItem() {
-        List<Item>itemList = itemRepository.findAllItem();
-        return itemList;
+        return itemRepository.findAllItem();
     }
     public List<Item> viewApprovedItem() {
-        List<Item>itemList = itemRepository.findApprovedItem();
-        return itemList;
+        return itemRepository.findApprovedItem();
     }
 
     public List<Item> viewNonApprovedItem() {
-        List<Item>itemList = itemRepository.findNonApprovedItem();
-        return itemList;
+        return itemRepository.findNonApprovedItem();
     }
 
     public Long buyItem(Item buyItem, Long userId, Long quantity, String currencyType) {

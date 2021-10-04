@@ -20,9 +20,6 @@ public class JdbcTempUserRepository implements UserRepository{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
-
-
     @Override
     public User createUser(User user) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert((jdbcTemplate));
@@ -58,14 +55,12 @@ public class JdbcTempUserRepository implements UserRepository{
 
     @Override
     public List<User> findByUserType(Long userType) {
-        List<User> result = jdbcTemplate.query("select * from user where type = ? ", userRowMapper(), userType);
-        return result;
+        return jdbcTemplate.query("select * from user where type = ? ", userRowMapper(), userType);
     }
 
     @Override
     public List<User> findAllUser() {
-        List<User> result = jdbcTemplate.query("select * from user ", userRowMapper());
-        return result;
+        return jdbcTemplate.query("select * from user ", userRowMapper());
     }
 
     //jdbcTemplate 쿼리 동작을 위한 RowMapper
@@ -80,7 +75,7 @@ public class JdbcTempUserRepository implements UserRepository{
         };
     }
 
-    //로그인 테스트 용, pw 대신, username과 usertype을 일치시키면 유저타입을 반환
+    //pw 대신, username과 usertype을 일치시키면 유저타입을 반환
     @Override
     public Long authUser(User user) {
         Boolean auth = null;

@@ -22,11 +22,7 @@ public class JdbcTempItemRepository implements ItemRepository{
     @Override
     public Item createItem(Item item) {
 
-        /*jdbcTemplate.update("INSERT INTO ITEM (name_kor = ?, text_kor = ?,price = ?,reg_date = ?, updt_date = ?) ", itemRowMapper(),
-                                    item.getItemNameKor(), item.getItemTextKor(),item.getItemPrice(), getDate(), getDate());
-        List<Item> result = jdbcTemplate.query("select * from ITEM where name_kor = ?", itemRowMapper(), item.getItemNameKor());
-        item.setItemId(result.stream().findAny().get().getItemId());
-        return item;*/
+
 
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("ITEM").usingColumns("name_kor","text_kor","price","creator", "reg_date", "updt_date" ).usingGeneratedKeyColumns("id");
@@ -96,14 +92,12 @@ public class JdbcTempItemRepository implements ItemRepository{
 
     @Override
     public List<Item> findNonApprovedItem() {
-        List<Item> result = jdbcTemplate.query("select * from ITEM where approved = ?", itemRowMapper(), true);
-        return result;
+        return jdbcTemplate.query("select * from ITEM where approved = ?", itemRowMapper(), true);
     }
 
     @Override
     public List<Item> findApprovedItem() {
-        List<Item> result = jdbcTemplate.query("select * from ITEM where approved = ?", itemRowMapper(), false);
-        return result;
+        return jdbcTemplate.query("select * from ITEM where approved = ?", itemRowMapper(), false);
     }
 
     @Override
@@ -161,8 +155,6 @@ public class JdbcTempItemRepository implements ItemRepository{
         return(rs, row) ->{
             Currency currency = new Currency();
             currency.setRate(rs.getDouble("rate"));
-//            rate.setCountry(rs.getString("country"));
-//            System.out.println("IN CurrencyRowMapper");
             return currency;
         };
     }

@@ -23,17 +23,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    /*
-    * USER CONTROLLER
-    * uri : /users
-    * USER 생성
-    * uri : POST /user/new
-    * USER 로그인
-    * uri : POST /users/login
-    * (USER 전체 조회)
-    * uri : GET /users/all
-    * */
-
 
     @GetMapping("/users/new")
     public String createForm() {
@@ -65,10 +54,9 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/users/all")
-    public List<User> list(Model model) {
+    public ResponseEntity listAll() {
         List<User> users = userService.findUserAll();
-        model.addAttribute("users", users);
-        return users;
+        return new ResponseEntity(users, HttpStatus.OK);
     }
 
 

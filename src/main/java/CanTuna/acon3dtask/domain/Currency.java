@@ -1,6 +1,9 @@
 package CanTuna.acon3dtask.domain;
 
+
 public class Currency {
+    private String country;
+    private Double rate;
 
     public String getCountry() {
         return country;
@@ -18,7 +21,6 @@ public class Currency {
         this.rate = rate;
     }
 
-    private String country;
-    private Double rate;
+
 
 }

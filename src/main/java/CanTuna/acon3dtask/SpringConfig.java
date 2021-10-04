@@ -43,9 +43,4 @@ public class SpringConfig {
         return new JdbcTempItemRepository(dataSource_item);
     }
 
-    /*@Bean
-    public ExRateRepository exRateRepository(){
-        return new JdbcTempExRateRepository(dataSource_rate);
-    }*/
-
 }

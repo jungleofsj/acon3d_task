@@ -61,13 +61,13 @@ class UserServiceTest {
         User testEditor = new User();
         testEditor.setName("editor1");
         testEditor.setType(User.USER_TYPE_EDITOR);
-
+        //when
         userService.joinUser(testEditor);
 
         User loginUser = new User();
         loginUser.setName("editor1");
         loginUser.setType(User.USER_TYPE_EDITOR);
-
+        //then
         Long logIn = userService.logInUser(loginUser);
         Assertions.assertThat(logIn).isEqualTo(testEditor.getType());
     }
