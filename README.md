@@ -83,6 +83,92 @@ public class Currency {
 }
 ```
 
+---
+
 ## User Controller
 
-[신규 유저 생성](https://www.notion.so/843a2abab50e4750aeec4cff1bf1d07c)
+- 신규 유저 생성
+
+ name, type을 입력하여 신규 유저 생성
+
+ - URI : POST /users/new
+
+ - parameter : @RequestBody User user
+
+ - In Success : return User, OK '200'
+
+ - In Error : return null,  BAD REQUEST '400'
+
+- 유저 로그인
+
+ User.name, User.type이 일치하면 로그인
+
+ - URI : POST /user/login
+
+ - parameter : @RequestBody User user
+
+ - In Sucess : return User.type, OK '200'
+
+ - In Error : return null,  BAD REQUEST '400'
+
+- 유저 리스트
+
+ 유저의 전체 목록 조회
+
+ - URI : GET /users/all
+
+ - parameter : 
+
+ - return : List<User>, HttpStatus.OK
+
+## User Controller
+
+- 신규 상품 생성
+
+ Authorization 값의 USER_TYPE_CREATOR와의 일치여부로 권한 확인, 상품 정보 입력하여 생성
+
+ - URI : POST /items/new
+
+ - parameter : @RequestHeader("Autorization") @RequestBody Item item
+
+ - In Success : return User, OK '200'
+
+ - In Error : return null, Unauthorized '401'
+
+- 신규 상품 생성
+
+ Authorization 값의 USER_TYPE_EDITOR와의 일치여부로 권한 확인, 상품 정보 수정
+
+ - URI : POST /items/update
+
+ - parameter : @RequestHeader("Autorization") @RequestBody Item item, @PathVariable("id") Long id
+
+ - In Success : return User, OK '200'
+
+ - In Authorization Error : return null, Unauthorized '401'
+
+ - In itemId Error : return "UnExist productID", BAD REQUEST '400'
+
+- 승인 또는 미승인 상품 조회
+
+권한에 따라 승인여부가 다른 상품을 조회
+
+ - URI : POST /items/approved
+
+ - parameter : @RequestHeader("Autorization") @RequestParam("isApproved") Boolean isApproved
+
+ - In Success : return List<User>, OK '200'
+
+ - In Authorization Error : return "열람권한이 없습니다.", Unauthorized '401'
+
+- 상품 구매
+
+상품 구매 기록을 DB에 INSERT
+
+ - URI : POST /items/purchase
+
+ - parameter : @RequestHeader("Autorization") @RequestParam("isApproved") Boolean isApproved
+
+ - In Success : return User.id, OK '200'
+
+ - In Exististance Error : return "없는 상품입니다.", BAD REQUEST '400'
