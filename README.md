@@ -20,8 +20,13 @@
 
  - IDE : IntelliJ
 
- - REST 기반 API 
-
+---
+# 가정 및 추가 사항
+ - 모든 DB에는 REG_DATE, UPDT_DATE 컬럼 존재
+ - Service 단에서만 테스트 코드 일부 확인
+ - 개별 API의 호출은 POSTMAN 을 통해 테스트
+ - REST 기반의 호출과 응답
+ - 구매 API는 Form을 통해 parameter를 받도록 설계
 ---
 
 ## Domain Class
